@@ -1,8 +1,8 @@
 const container = document.querySelector('.container');
 const messageBox = document.querySelector('.messageBox');
-let width = 101;
-let position = [(width-1)/2,(width-1)/2]
-console.log(position)
+let gridBox;
+let width = 10;
+let mouseDown = true;
 
 
 function createGrid(width) {
@@ -14,7 +14,17 @@ function createGrid(width) {
         container.lastChild.setAttribute(`style`, `width:${gridBoxWidth}px;height:auto`)
         }
     }
+    gridBox = document.querySelectorAll('.gridBox');
+}
+
+
+function hoverDraw(e) {
+        console.log(e.target);
+        e.target.style.background = "black";
 }
 
 createGrid(width);
+
+gridBox.forEach((box) => {box.addEventListener('mouseover',hoverDraw)});
+
 
