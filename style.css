@@ -7,11 +7,17 @@ html {
   }
 .container {
     background: white;
-    height: 800px;
+    height: 900px;
     width: 800px;
+    margin: 20px auto;
     display: flex;
     flex-wrap: wrap;
 }
-.gridBox:hover {
-  background:grey;
+
+.gridBox {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
