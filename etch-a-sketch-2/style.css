@@ -1,22 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
   }
 *, *:before, *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
   }
-.container {
-    height: 800px;
-    width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    
+.frame {
+  position: relative;
+  height: 750px;
+  width: 1000px;
+  margin: 40px auto 0px;
+  background: rgb(250, 0, 9);
+  border-radius: 10px;
+  border-top: 50px solid rgb(222, 75, 83);
+  border-right: 50px solid rgb(255, 180, 188);
+  border-bottom: 50px solid rgb(204, 58, 69);
+  border-left: 50px solid rgb(255, 180, 188);
 }
+.screen {
+  height: 504px;
+  width: 672px;
+  position: absolute;
+  top: 73px;
+  left: 114px;
+  background: rgb(216, 213, 213);
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 2;
+}
+.leftKnob,
+.rightKnob {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgb(202, 199, 199);
+  position: absolute;
+}
+.leftKnob {
+  bottom: -40px;
+  left: -40px;
+}
+.rightKnob {
+  bottom: -40px;
+  right: -40px;
+}
+
+
 .messageBox {
-    margin: 20px auto;
-    width: 300px;
-    text-align: center;
+  margin: 20px auto;
+  width: 300px;
+  text-align: center;
 }
 .gridBoxDark {
-  background:rgb(241, 9, 191);
+  background:rgb(73, 72, 72);
 }
