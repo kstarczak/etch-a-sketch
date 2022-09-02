@@ -1,42 +1,103 @@
-const container = document.querySelector('.container');
+const screen = document.querySelector('.screen');
 const messageBox = document.querySelector('.messageBox');
-let gridBox;
-let width = 21;
-let mouseDown;
+const screenWidth = screen.offsetWidth;
+const screenHeight = screen.offsetHeight;
+const color = document.querySelector('#colorSelector');
+let width = 112
+let height = 84
+let position = [(width) / 2, (height) / 2];
+console.log(position);
 
 
-function createGrid(width) {
-    for (let y = 0; y < (width); y++) {
+// run function below when user changes size. lowest width is 3 and hightest is 504. CHECK IF e.value is correct
+function sizeSelector(e = 168) {
+    width = e.value * 3;
+    height = e.value * 4;
+    position = [( width) / 2, (height) / 2];
+}
+// add eventlistener and scroll bar
+// const scrollBar = document.querySelector(.....class of the scrollbar)
+// scrollBar.addEventListener('change', sizeSelector);
+
+
+
+/* create selector to pick colors
+let color = "black";
+
+
+
+function colorSelector(e = "black") {
+    color = e.value;
+}
+ */
+
+// how to replace class if one exists or create one if it does no
+
+
+
+
+function createGrid(width,height) {
+    for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
-        container.appendChild(document.createElement('div'));
-        container.lastChild.classList.add('gridBox');
-        const gridBoxWidth= 900 / width;
-        container.lastChild.setAttribute(`style`, `width:${gridBoxWidth}px;height:auto`);
-        container.lastChild.setAttribute('draggable', 'false');
+        screen.appendChild(document.createElement('div'));
+        screen.lastChild.classList.add('gridBox');
+        screen.lastChild.classList.add(`x-${x}`);
+        screen.lastChild.classList.add(`y-${y}`);
+            const gridBoxWidth = 6;
+            const gridBoxHeight = 6;
+        screen.lastChild.setAttribute(`style`, `width:${gridBoxWidth}px;height:${gridBoxHeight}`)
         }
     }
-    gridBox = document.querySelectorAll('.gridBox');
 }
 
-function mouseClick(e) {
-    if (e.type === 'mousedown') {
-        mouseDown = true;
-    } else if (e.type === 'mouseup') {
-        mouseDown = false;
+createGrid(width,height);
+
+
+function draw(e) {
+    if (e.code === 'ArrowDown') {
+        if (position[1] < height-1) {
+            position[1] += 1;
+            const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
+            gridDark.classList.add('gridBoxDark')
+            messageBox.textContent = 'Use the arrow keys draw';
+
+        } else {
+            messageBox.textContent = 'You\'ve reached the bottom edge of the screen';
+            console.log(position);
+        };
+    } else if (e.code === 'ArrowUp') {
+        if (position[1] > 0) {
+            position[1] -= 1;
+            const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
+            gridDark.classList.add('gridBoxDark')
+            messageBox.textContent = 'Use the arrow keys draw';
+        } else {
+            messageBox.textContent = 'You\'ve reached the top edge of the screen.';
+        };
+    } else if (e.code === 'ArrowRight') {
+        if (position[0] < width-1) {
+            position[0] += 1;
+            const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
+            gridDark.classList.add('gridBoxDark');
+            messageBox.textContent = 'Use the arrow keys draw';
+        } else {
+            messageBox.textContent = 'You\'ve reached the right edge of the screen.';
+        };
+    } else if (e.code === 'ArrowLeft') {
+        if (position[0] > 0) {
+            position[0] -= 1;
+            const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
+            gridDark.classList.add('gridBoxDark')
+            messageBox.textContent = 'Use the arrow keys draw';
+        } else {
+            messageBox.textContent = 'You\'ve reached the left edge of the screen.';
+        };
+    } else {
+        messageBox.textContent = 'Use one of the arrow keys to draw.';
     }
 }
 
-function hoverDraw(e) {
-    if (mouseDown) {  
-        e.target.style.background = "black";
-    }
-}
-
-createGrid(width);
-
-gridBox.forEach((box) => {box.addEventListener('mouseenter',hoverDraw)});
-document.addEventListener('mousedown',mouseClick);
-document.addEventListener('mouseup',mouseClick);
 
 
+document.addEventListener('keydown', draw);
 

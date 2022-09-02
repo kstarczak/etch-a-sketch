@@ -1,23 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 html {
-    box-sizing: border-box;
-    background:grey;
+  box-sizing: border-box;
   }
 *, *:before, *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
   }
-.container {
-    background: white;
-    height: 900px;
-    width: 800px;
-    margin: 20px auto;
-    display: flex;
-    flex-wrap: wrap;
+body {
+  background-color: rgb(224, 216, 216);
+}
+.frame {
+  position: relative;
+  height: 750px;
+  width: 1000px;
+  margin: 40px auto 0px;
+  background: rgb(204, 58, 69);
+  border-radius: 10px;
+}
+.frame::after {
+  position:absolute;
+  content: '';
+  top: 0px;
+  left: 0px;
+  height: 750px;
+  width: 1000px;
+  background: rgb(250, 0, 9);
+  border-radius: 10px;
+  border-top: 50px solid rgb(222, 75, 83);
+  border-right: 50px solid rgb(255, 180, 188);
+  border-bottom: 50px solid rgb(204, 58, 69);
+  border-left: 50px solid rgb(255, 180, 188);
+  filter: blur(5px);
+}
+.screen {
+  height: 504px;
+  width: 672px;
+  position: absolute;
+  top: 123px;
+  left: 164px;
+  background: rgb(216, 213, 213);
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 3;
+}
+.leftKnob,
+.rightKnob {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  color: rgb(58, 56, 56);
+  background: rgb(202, 199, 199);
+  position: absolute;
+  padding-top: 60px;
+  text-align: center;
+  transition: 0.5s;
+  z-index: 3;
+}
+.leftKnob:hover,
+.rightKnob:hover {
+  transform: translateY(-10px);
+  background: rgb(238, 228, 228);
+}
+.leftKnob {
+  bottom:12px;
+  left:12px;
+}
+.rightKnob {
+  bottom: 12px;
+  right: 12px;
 }
 
-.gridBox {
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
+.color {
+  position: absolute;
+  bottom: 60px;
+  left: 450px;
+  Width: 100px;
+  z-index: 3;
+}
+.messageBox {
+  position: absolute;
+  top: 70px;
+  left: 300px;
+  width: 400px;
+  color: rgb(206, 191, 191);
+  font-size: 20px;
+  text-align: center;
+  z-index: 4;
+}
+.gridBoxDark {
+  background:rgb(92, 90, 90);
 }

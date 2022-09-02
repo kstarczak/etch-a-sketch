@@ -6,7 +6,23 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <div class="container">
+        <div class="frame">
+            <div class="screen"></div>
+            <div class="leftKnob">Change Size</div>
+            <div class="rightKnob">Clear Screen</div>
+            <div class="size"></div>
+            <div class="color">
+                <select name="current_color" id="colorSelector">
+                    <option value="gray">Gray (default)</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="purple">Purple</option>
+                </select>
+            </div>
+            <div class="messageBox">Use the arrow keys draw</div>
         </div>
     </body>
 </html>
