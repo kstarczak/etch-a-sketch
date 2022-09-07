@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -8,31 +10,56 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
   }
-body {
-  background-color: rgb(224, 216, 216);
+
+.content {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
 }
-.frame {
+.cover {
+  position:absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(0, 0%, 0%, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+}
+.main {
+  background-color: rgb(224, 216, 216);
+  width: 100vw;
+  height: calc(100vh - 55px);
+  padding: 50px;
+}
+.etch-a-sketch{
   position: relative;
   height: 750px;
   width: 1000px;
-  margin: 40px auto 0px;
-  background: rgb(204, 58, 69);
+  margin: auto;
   border-radius: 10px;
 }
-.frame::after {
-  position:absolute;
-  content: '';
-  top: 0px;
-  left: 0px;
-  height: 750px;
-  width: 1000px;
+.frame {
+  position: absolute;
   background: rgb(250, 0, 9);
   border-radius: 10px;
   border-top: 50px solid rgb(222, 75, 83);
-  border-right: 50px solid rgb(255, 180, 188);
   border-bottom: 50px solid rgb(204, 58, 69);
-  border-left: 50px solid rgb(255, 180, 188);
-  filter: blur(5px);
+  border-inline: 50px solid rgb(255, 180, 188);
+  height: 750px;
+  width: 1000px;
+  background: rgb(204, 58, 69);
+  border-radius: 10px;
+  box-shadow: 4px 4px 15px rgb(112, 112, 112);
+}
+.frame-filter {
+  position: absolute;
+  content: '';
+  top: -50px;
+  left: -50px;
+  height: 750px;
+  width: 1000px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
 }
 .screen {
   height: 504px;
@@ -44,24 +71,111 @@ body {
   display: flex;
   flex-wrap: wrap;
   z-index: 3;
+  box-shadow: inset 2px 2px 6px rgb(70, 70, 70);
 }
-.leftKnob,
-.rightKnob {
+.settings {
+  height: 504px;
+  width: 672px;
+  position: absolute;
+  top: 123px;
+  left: 164px;
+  background-color: hsl(0, 0%, 80%);
+  z-index:9999;
+  padding: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+.settings>form>div {
+  padding: 20px;
+  margin-bottom: 50px;
+}
+.settings .color-group {
+  display:flex;
+  justify-content: space-evenly;
+}
+.settings .color-group>div {
+  padding: 10px;
+}
+.settings .color-container{
+  position: relative;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  color: transparent;
+}
+.settings .color-container>input {
+  display: none;
+}
+.settings .color-container>span{
+  position: absolute;
+  content:'';
+  top: 0;
+  left: 0;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-color: blue;
+  opacity: 0.4;
+  transition: all 100ms;
+}
+.settings input#black~ span {
+  background-color: black;
+}
+.settings input#blue~ span {
+  background-color: blue;
+}
+.settings input#green~ span {
+  background-color: green;
+}
+.settings input#red~ span {
+  background-color: red;
+}
+
+.settings input:checked ~ span {
+  outline: 5px solid hsl(0, 0%, 100%);
+  box-shadow: 0px 0px 0px 10px hsl(0, 0%, 0%);
+}
+.settings .button-group {
+  display: flex;
+  gap: 50px;
+  margin-top: 70px;
+ 
+} 
+.settings .button-group>button{
+  padding: 20px;
+  width: 200px;
+  height: 70px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 2px 2px 10px rgb(116, 116, 116);
+}
+.gridBoxDark {
+  background:rgb(92, 90, 90);
+}
+.knob {
+  position: absolute;
   width: 140px;
   height: 140px;
+  border: 1px solid rgb(119, 119, 119);
   border-radius: 50%;
-  color: rgb(58, 56, 56);
+  color: rgb(109, 109, 109);
+  font-size: 20px;
   background: rgb(202, 199, 199);
-  position: absolute;
   padding-top: 60px;
+  box-shadow: 2px 2px 6px rgb(95, 95, 95);
   text-align: center;
-  transition: 0.5s;
+  user-select: none;
+  transition: 200ms;
   z-index: 3;
 }
-.leftKnob:hover,
-.rightKnob:hover {
-  transform: translateY(-10px);
-  background: rgb(238, 228, 228);
+.knob:hover {
+  background-color: rgb(250, 238, 206);
+  border-color: rgb(250, 238, 206);
+  box-shadow: 0px 0px 20px 2px rgb(250, 208, 69);
 }
 .leftKnob {
   bottom:12px;
@@ -71,24 +185,44 @@ body {
   bottom: 12px;
   right: 12px;
 }
-
-.color {
+.leftKnob::after {
+  pointer-events: none;
   position: absolute;
-  bottom: 60px;
-  left: 450px;
-  Width: 100px;
-  z-index: 3;
+  right: 80px;
+  bottom: 80px;
+  content: 'Settings under constructon';
+  background-color: whitesmoke;
+  opacity: 0;
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  border: 2px solid rgb(202, 202, 202);
+  border-radius: 20px;
+  transition: 200ms;
+}
+.leftKnob:hover::after{
+  display: block;
+  opacity: 0.9;
 }
 .messageBox {
   position: absolute;
-  top: 70px;
-  left: 300px;
-  width: 400px;
-  color: rgb(206, 191, 191);
+  top: 350px;
+  left: 325px;
+  color: rgb(92, 90, 90);
+  background: rgb(216, 213, 213);
   font-size: 20px;
+  padding: 20px;
   text-align: center;
   z-index: 4;
 }
-.gridBoxDark {
-  background:rgb(92, 90, 90);
+footer {
+  font-size: 20px;
+  padding: 1rem;
+  text-align: center;
+  background-color: hsl(0, 0%, 20%);
+  color: white;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }

@@ -6,23 +6,64 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <div class="frame">
-            <div class="screen"></div>
-            <div class="leftKnob">Change Size</div>
-            <div class="rightKnob">Clear Screen</div>
-            <div class="size"></div>
-            <div class="color">
-                <select name="current_color" id="colorSelector">
-                    <option value="gray">Gray (default)</option>
-                    <option value="red">Red</option>
-                    <option value="orange">Orange</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="green">Green</option>
-                    <option value="blue">Blue</option>
-                    <option value="purple">Purple</option>
-                </select>
+        <div class="content">
+            <div class="cover" style="display:none"></div>
+            <div class="main">
+                <div class="etch-a-sketch">
+                    <div class="frame">
+                        <div class="frame-filter"></div>
+                    </div>
+                    <div class="screen"></div>
+                    <div class="settings" style="display:none">
+                        <form>
+                            <div class="size-field">
+                                <label for="pixel-size">Pixel Size:  </label>
+                                <input id="pixel-size" type="range">
+                                <span class="pixel-size-output"></span>
+                            </div>
+                            <div class="color-field">
+                                <div>Select a Color:</div>
+                                <div class="color-group">
+                                    <div>
+                                        <label class="color-container" for="black">black
+                                            <input name="color" type="radio" id="black" checked>
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="color-container" for="blue">blue
+                                            <input name="color" type="radio" id="blue">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="color-container" for="green">green
+                                            <input name="color" type="radio" id="green">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="color-container" for="red">red
+                                            <input name="color" type="radio" id="red">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="button-group">
+                                    <button type="button">Submit Changes</button>
+                                    <button type="button">Cancel</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="messageBox">Use the keyboard arrow keys to draw</div>
+                    <div class="leftKnob knob">Settings</div>
+                    <div class="rightKnob knob">Clear</div>
+                    <div class="size-selector"></div>
+                </div>
             </div>
-            <div class="messageBox">Use the arrow keys draw</div>
+            <footer>Copyright &copy; 2022 Konrad Starczak</footer>
         </div>
     </body>
 </html>

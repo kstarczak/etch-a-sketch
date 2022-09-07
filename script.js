@@ -1,12 +1,14 @@
 const screen = document.querySelector('.screen');
 const messageBox = document.querySelector('.messageBox');
+const openSettingsBtn = document.querySelector('.leftKnob');
+const clearBtn = document.querySelector('.rightKnob');
+const cover = document.querySelector('.cover');
+const settingsForm = document.querySelector('.settings');
 const screenWidth = screen.offsetWidth;
 const screenHeight = screen.offsetHeight;
-const color = document.querySelector('#colorSelector');
 let width = 112
 let height = 84
 let position = [(width) / 2, (height) / 2];
-console.log(position);
 
 
 // run function below when user changes size. lowest width is 3 and hightest is 504. CHECK IF e.value is correct
@@ -31,9 +33,6 @@ function colorSelector(e = "black") {
 }
  */
 
-// how to replace class if one exists or create one if it does no
-
-
 
 
 function createGrid(width,height) {
@@ -48,56 +47,65 @@ function createGrid(width,height) {
         screen.lastChild.setAttribute(`style`, `width:${gridBoxWidth}px;height:${gridBoxHeight}`)
         }
     }
+    position = [(width) / 2, (height) / 2];
 }
 
-createGrid(width,height);
+function clearGrid() {
+    while (screen.firstElementChild) {
+        screen.removeChild(screen.lastElementChild);
+    }
+    createGrid(width,height);
+
+};
 
 
 function draw(e) {
+    if (messageBox.style.display !== 'none' && (e.code === 'ArrowDown' || e.code === 'ArrowUp' || e.code === 'ArrowRight' || e.code === 'ArrowLeft')) {
+        messageBox.style.display = 'none';
+    }
     if (e.code === 'ArrowDown') {
         if (position[1] < height-1) {
             position[1] += 1;
             const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
             gridDark.classList.add('gridBoxDark')
-            messageBox.textContent = 'Use the arrow keys draw';
-
-        } else {
-            messageBox.textContent = 'You\'ve reached the bottom edge of the screen';
-            console.log(position);
         };
     } else if (e.code === 'ArrowUp') {
         if (position[1] > 0) {
             position[1] -= 1;
             const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
-            gridDark.classList.add('gridBoxDark')
-            messageBox.textContent = 'Use the arrow keys draw';
-        } else {
-            messageBox.textContent = 'You\'ve reached the top edge of the screen.';
+            gridDark.classList.add('gridBoxDark');
         };
     } else if (e.code === 'ArrowRight') {
         if (position[0] < width-1) {
             position[0] += 1;
             const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
             gridDark.classList.add('gridBoxDark');
-            messageBox.textContent = 'Use the arrow keys draw';
-        } else {
-            messageBox.textContent = 'You\'ve reached the right edge of the screen.';
         };
     } else if (e.code === 'ArrowLeft') {
         if (position[0] > 0) {
             position[0] -= 1;
             const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
-            gridDark.classList.add('gridBoxDark')
-            messageBox.textContent = 'Use the arrow keys draw';
-        } else {
-            messageBox.textContent = 'You\'ve reached the left edge of the screen.';
+            gridDark.classList.add('gridBoxDark');
         };
     } else {
-        messageBox.textContent = 'Use one of the arrow keys to draw.';
+        messageBox.style.display = 'block';
     }
 }
 
+function displaySettings() {
+    cover.style.display ="block";
+    settingsForm.style.display="block";
+}
 
+function hideSettings() {
+    cover.style.display = "none";
+    settingsForm.style.display = "none";
+}
+
+createGrid(width,height);
 
 document.addEventListener('keydown', draw);
+clearBtn.addEventListener('click', clearGrid);
+//openSettingsBtn.addEventListener('click', displaySettings);
+//closeSettingsBtn.addEventListener('click', hideSettings);
 
