@@ -4,6 +4,10 @@
   margin: 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+  display: block;
+}
 html {
   box-sizing: border-box;
   }
@@ -162,7 +166,8 @@ html {
   height: 140px;
   border: 1px solid rgb(119, 119, 119);
   border-radius: 50%;
-  color: rgb(109, 109, 109);
+  color: rgb(126, 126, 126);
+  text-shadow: 1px 1px 2px rgb(107, 107, 107);
   font-size: 20px;
   background: rgb(202, 199, 199);
   padding-top: 60px;
@@ -180,29 +185,11 @@ html {
 .leftKnob {
   bottom:12px;
   left:12px;
+  text-decoration: none;
 }
 .rightKnob {
   bottom: 12px;
   right: 12px;
-}
-.leftKnob::after {
-  pointer-events: none;
-  position: absolute;
-  right: 80px;
-  bottom: 80px;
-  content: 'Settings under constructon';
-  background-color: whitesmoke;
-  opacity: 0;
-  width: 200px;
-  height: 100px;
-  padding: 20px;
-  border: 2px solid rgb(202, 202, 202);
-  border-radius: 20px;
-  transition: 200ms;
-}
-.leftKnob:hover::after{
-  display: block;
-  opacity: 0.9;
 }
 .messageBox {
   position: absolute;
@@ -217,12 +204,20 @@ html {
 }
 footer {
   font-size: 20px;
-  padding: 1rem;
+  padding: 1.25rem;
   text-align: center;
   background-color: hsl(0, 0%, 20%);
-  color: white;
   width: 100vw;
   position: fixed;
   bottom: 0;
   left: 0;
+}
+footer>a{
+  color: white;
+  margin: 0 auto;
+  transition: 200ms all;
+}
+footer>a:hover{
+  color: rgb(255, 240, 154);
+  transform: scale(1.125);
 }

@@ -21,19 +21,13 @@ function sizeSelector(e = 168) {
 // const scrollBar = document.querySelector(.....class of the scrollbar)
 // scrollBar.addEventListener('change', sizeSelector);
 
-
-
 /* create selector to pick colors
 let color = "black";
-
-
 
 function colorSelector(e = "black") {
     color = e.value;
 }
  */
-
-
 
 function createGrid(width,height) {
     for (let y = 0; y < height; y++) {
@@ -51,6 +45,7 @@ function createGrid(width,height) {
 }
 
 function clearGrid() {
+    messageBox.textContent = "Use the keyboard arrow keys to draw";
     while (screen.firstElementChild) {
         screen.removeChild(screen.lastElementChild);
     }
@@ -68,30 +63,48 @@ function draw(e) {
             position[1] += 1;
             const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
             gridDark.classList.add('gridBoxDark')
+        } else {
+            messageBox.textContent = "You've reached the bottom of the screen";
+            messageBox.style.display = 'block';
         };
     } else if (e.code === 'ArrowUp') {
         if (position[1] > 0) {
             position[1] -= 1;
             const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
             gridDark.classList.add('gridBoxDark');
+        } else {
+            messageBox.textContent = "You've reached the top of the screen";
+            messageBox.style.display = 'block';
         };
     } else if (e.code === 'ArrowRight') {
         if (position[0] < width-1) {
             position[0] += 1;
             const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
             gridDark.classList.add('gridBoxDark');
+        } else {
+            messageBox.textContent = "You've reached the right side of the screen";
+            messageBox.style.display = 'block';
         };
     } else if (e.code === 'ArrowLeft') {
         if (position[0] > 0) {
             position[0] -= 1;
             const gridDark = document.querySelector(`.x-${position[0]}.y-${position[1]}`)
             gridDark.classList.add('gridBoxDark');
+        } else {
+            messageBox.textContent = "You've reached the left side of the screen";
+            messageBox.style.display = 'block';
         };
     } else {
         messageBox.style.display = 'block';
     }
 }
 
+createGrid(width,height);
+
+document.addEventListener('keydown', draw);
+clearBtn.addEventListener('click', clearGrid);
+
+/*
 function displaySettings() {
     cover.style.display ="block";
     settingsForm.style.display="block";
@@ -101,11 +114,6 @@ function hideSettings() {
     cover.style.display = "none";
     settingsForm.style.display = "none";
 }
-
-createGrid(width,height);
-
-document.addEventListener('keydown', draw);
-clearBtn.addEventListener('click', clearGrid);
-//openSettingsBtn.addEventListener('click', displaySettings);
-//closeSettingsBtn.addEventListener('click', hideSettings);
-
+openSettingsBtn.addEventListener('click', displaySettings);
+closeSettingsBtn.addEventListener('click', hideSettings);
+*/
